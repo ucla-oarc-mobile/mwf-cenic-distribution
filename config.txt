@@ -1,0 +1,13 @@
+# this is a comment
+"UCLA.directory" "var/www/html/mwf/ucla.prod"
+"UCLA.secret" "fnsoifenwuv;dm sklnuiwnfejo;wncdjksnvds"
+"UCLA.that other thing" "none"
+
+   # this is another comment
+"UCB.directory" "/var/www/html/mwf/ucb.prod"
+"UCB.secret" "none"
+"UCB.that other thing" "none"
+
+"UCSB.directory" "/var/www/html/mwf/ucsb.prod"
+"UCSB.secret" "neskjofndjsmklndjsalhfueiwnlfjkdsnjkdns"
+"UCSB.that other thing" "none"
