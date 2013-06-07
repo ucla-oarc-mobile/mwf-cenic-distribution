@@ -1,13 +1,14 @@
-# this is a comment
-"UCLA.directory" "var/www/html/mwf/ucla.prod"
-"UCLA.secret" "fnsoifenwuv;dm sklnuiwnfejo;wncdjksnvds"
-"UCLA.that other thing" "none"
+# this is the format for a standard entry
+# note that comments contain a # as the FIRST non-whitespace character of the line ONLY
+#UCLA.directory /var/www/html/mwf/ucla.prod
+#UCLA.secret fnsoifenwuv;dm sklnuiwnfejo;wncdjksnvds
+#UCLA.that_other_thing none
 
    # this is another comment
-"UCB.directory" "/var/www/html/mwf/ucb.prod"
-"UCB.secret" "none"
-"UCB.that other thing" "none"
+UCB.directory /var/www/html/mwf/ucb.prod
+UCB.secret none   # this is an inline comment
+UCB.that_other_thing none
 
-"UCSB.directory" "/var/www/html/mwf/ucsb.prod"
-"UCSB.secret" "neskjofndjsmklndjsalhfueiwnlfjkdsnjkdns"
-"UCSB.that other thing" "none"
+UCSB.directory /var/www/html/mwf/ucsb.prod
+UCSB.secret neskjofndjsmklndjsalhfueiwnlfjkdsnjkdns
+UCSB.that_other_thing none

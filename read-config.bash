@@ -2,20 +2,24 @@
 
 declare -A values
 
-echo "Startin.."
-exec<config.txt
+# errors
+2>error.log
 
+# remove comments and put comment free file in temp.config.txt
+echo "Starting.."
+{
+ sed "s/#.*//" | sed -e 's/^[ \t]*//' | sed '/^$/d'
+} < config.txt  > temp.config.txt
+
+
+# parse the comment free config file
+exec <temp.config.txt
 while read line
    do 
    len=${#line}
    if [[ $len -gt 0  ]] 
       then 
-         if [[ "$line" =~ .*\#.* ]]
-            then
-               echo -n
-            else
-               values[${line[0]}]=${line[1]}
-         fi
+         values[${line[0]}]=${line[1]}
    fi
    done
 
