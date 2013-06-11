@@ -13,10 +13,9 @@ echo "Starting.."
 
 for TEMPS in ./templates/*
   do
-   while read line
-     do
-      eval echo "$line"
-     done < ${TEMPS}
+   {
+    sed -e "s///" | sed -e 's/^[ \t]*//' | sed '/^$/d'
+   } < config.txt  > temp.config.txt
   done
 exit
 

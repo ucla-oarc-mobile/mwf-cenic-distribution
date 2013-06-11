@@ -28,3 +28,4 @@ for KEY in "${!values[@]}"
    do
       echo "$KEY ${values[$KEY]}"
    done
+rm temp.config.txt
