@@ -1,8 +1,14 @@
 # this is the format for a standard entry
-# note that comments contain a # as the FIRST non-whitespace character of the line ONLY
-#UCLA.directory /var/www/html/mwf/ucla.prod
-#UCLA.secret fnsoifenwuv;dm sklnuiwnfejo;wncdjksnvds
-#UCLA.that_other_thing none
+# note that comments contain a # and anything after the first # is ignored. 
+# The entry for UCLA should look like this:
+# UCLA.hostname UCLA
+# UCLA.directory /var/www/html/mwf/ucla.prod
+# UCLA.git_user_ID StillSlippery
+# UCLA.git_repository mwf-cenic
+# UCLA.url_path http://m.ucla.edu
+# UCLA.
+# UCLA.
+# UCLA.
 
    # this is another comment
 UCB.directory /var/www/html/mwf/ucb.prod
