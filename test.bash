@@ -1,8 +1,30 @@
 #!/bin/bash
 
 . config.txt
+
+function replace(){
+     replace_result=$(echo $1 | sed \
+     -e "s^\[\[path\]\]^${path}^g" \
+     -e "s^\[\[directory\]\]^${direcotry}^g" \
+     -e "s^\[\[site_url\]\]^${server_name}^g" \
+     -e "s^\[\[url_path\]\]^${url_path}^g" \
+     -e "s^\[\[site_name\]\]^${site_name}^g"\
+     -e "s^\[\[server_aliases\]\]^${server_aliases}^g" \
+     -e "s^\[\[docroot\]\]^${docroot}^g" \
+     -e "s^\[\[server_name\]\]^${server_name}^g" )
+}
+
 echo "Starting.."
 
+for X in "${!UCLA[@]}"
+  do
+    eval $X=${UCLA[$X]}
+  done
+
+replace ${config_files[base.ini]}
+echo $replace_result
+
+exit
 for K in "${!config_files[@]}"
   do
    echo ./templates/$K = ${config_files[$K]}
