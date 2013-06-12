@@ -1,5 +1,11 @@
 #!/bin/bash
 
+config_files= \
+  ( [alias.conf]= /etc/httpd/conf.d/alias.conf \
+    [base.ini]= '[[docroot]]/config/base.ini' \
+    [virtualhost.conf]= /etc/httpd/conf.d  \
+  )
+
 declare -A values
 
 # errors

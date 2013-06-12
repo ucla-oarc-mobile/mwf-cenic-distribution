@@ -1,15 +1,3 @@
-# this is the format for a standard entry
-# note that comments contain a # and anything after the first # is ignored. 
-# The entry for UCLA should look like this:
-# UCLA.server_name ucla
-# UCLA.docroot /var/www/html/mwf/ucla.prod
-# UCLA.git_user_ID StillSlippery
-# UCLA.git_repository mwf-cenic
-# UCLA.url_path http://m.ucla.edu
-# UCLA.path /var/www/html/
-# UCLA.
-# UCLA.
-# 
 # 
 # so far, these are the files and variables used
 # path
@@ -22,11 +10,29 @@
 # docroot
 # 
 
-   # this is another comment
-UCB.directory /var/www/html/mwf/ucb.prod
-UCB.secret none   # this is an inline comment
-UCB.that_other_thing none
+declare -A config_files
+config_files=(
+   [alias.conf]='/etc/httpd/conf.d/alias.conf'
+   [base.ini]='[[docroot]]/config/base.ini'
+   [virtualhost.conf]='/etc/httpd/conf.d'
+  )
 
-UCSB.directory /var/www/html/mwf/ucsb.prod
-UCSB.secret neskjofndjsmklndjsalhfueiwnlfjkdsnjkdns
-UCSB.that_other_thing none
+declare -A HOSTS
+HOSTS=(
+   [UCLA]=active
+   [UCSB]=inactive
+   [UCB]=inactive
+   [UCSD]=inactive
+)
+
+declare -A UCLA
+UCLA=(
+   [host]=UCLA
+   [server_name]=m.ucla.edu
+   [docroot]=/var/www/html/mwf/ucla.prod
+   [git_user_ID]=StillSlippery
+   [git_repository]=mwf-cenic
+   [url_path]=http://m.ucla.edu
+   [path]=""
+)
+
