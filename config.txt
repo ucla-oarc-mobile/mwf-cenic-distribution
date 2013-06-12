@@ -10,13 +10,34 @@
 # docroot
 # 
 
+# the replace function that is used to replace the variables
+# used in a file or variable.
+function replace(){
+     replace_result=$(echo $1 | sed \
+     -e "s^\[\[path\]\]^${path}^g" \
+     -e "s^\[\[directory\]\]^${direcotry}^g" \
+     -e "s^\[\[site_url\]\]^${server_name}^g" \
+     -e "s^\[\[url_path\]\]^${url_path}^g" \
+     -e "s^\[\[site_name\]\]^${site_name}^g"\
+     -e "s^\[\[server_aliases\]\]^${server_aliases}^g" \
+     -e "s^\[\[docroot\]\]^${docroot}^g" \
+     -e "s^\[\[server_name\]\]^${server_name}^g" \
+     -e "s^\[\[host\]\]^${host}^g" )
+     echo $replace_result
+}
+
+# config files [file.name]='file/location'
+# can include replaceable variables like [[docroot]]
 declare -A config_files
 config_files=(
-   [alias.conf]='/etc/httpd/conf.d/alias.conf'
+   [alias.conf]='/etc/httpd/conf.d/[[host]]-alias.conf'
    [base.ini]='[[docroot]]/config/base.ini'
-   [virtualhost.conf]='/etc/httpd/conf.d'
+   [virtualhost.conf]='/etc/httpd/conf.d/[[host]]-vhost.conf'
   )
 
+# Hosts array
+# [hostname]=status (active|inactive) 
+# anything other than active is considered inactive and ignored
 declare -A HOSTS
 HOSTS=(
    [UCLA]=active
@@ -25,14 +46,14 @@ HOSTS=(
    [UCSD]=inactive
 )
 
-declare -A UCLA
-UCLA=(
-   [host]=UCLA
-   [server_name]=m.ucla.edu
-   [docroot]=/var/www/html/mwf/ucla.prod
-   [git_user_ID]=StillSlippery
-   [git_repository]=mwf-cenic
-   [url_path]=http://m.ucla.edu
+# a host definition the array name much match the HOSTS index exactly
+declare -A UCLA=(
+   [host]="UCLA"
+   [server_name]="m.ucla.edu"
+   [docroot]="/var/www/html/mwf/ucla.prod"
+   [git_user_ID]="StillSlippery"
+   [git_repository]="mwf-cenic"
+   [url_path]="http://m.ucla.edu"
    [path]=""
 )
 

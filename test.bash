@@ -1,38 +1,41 @@
 #!/bin/bash
 
+# configureation and replace function are in the config.txt file that is sourced below
 . config.txt
-
-function replace(){
-     replace_result=$(echo $1 | sed \
-     -e "s^\[\[path\]\]^${path}^g" \
-     -e "s^\[\[directory\]\]^${direcotry}^g" \
-     -e "s^\[\[site_url\]\]^${server_name}^g" \
-     -e "s^\[\[url_path\]\]^${url_path}^g" \
-     -e "s^\[\[site_name\]\]^${site_name}^g"\
-     -e "s^\[\[server_aliases\]\]^${server_aliases}^g" \
-     -e "s^\[\[docroot\]\]^${docroot}^g" \
-     -e "s^\[\[server_name\]\]^${server_name}^g" )
-}
 
 echo "Starting.."
 
-for X in "${!UCLA[@]}"
-  do
-    eval $X=${UCLA[$X]}
-  done
 
-replace ${config_files[base.ini]}
-echo $replace_result
-
+for host in "${!HOSTS[@]}"
+do
+  echo $host
+  if [ ${HOSTS[$host]} = "active" ]
+  then
+    echo $host is ACTIVE
+    assoc_array_string=$(declare -p $host)
+    eval "declare -A new_host_array="${assoc_array_string#*=}
+# set up the variables for substitution and creation of the config files like
+#  path=/var/www/html/mwf/ucla.prod
+    for X in "${!new_host_array[@]}"
+      do
+        echo host variable = $new_host_array[$X]
+        eval $X=${new_host_array[$X]}
+      done
+    
+     for file_base in ${!config_files[@]}
+       do
+        file_in=$(replace ${config_files[$file_base]})
+        echo ./templates/$file_base goes to  $(replace ${config_files[$file_base]})
+        echo "base = $file_base , file = $file_in"
+       done
+  else
+   echo "Host $host is NOT active"
+  fi
+done  
 exit
-for K in "${!config_files[@]}"
-  do
-   echo ./templates/$K = ${config_files[$K]}
-  done
 
 
-for file_in in ./templates/*
- do
+
   echo "$file_in"
   file_base=${file_in##*/}
    {
