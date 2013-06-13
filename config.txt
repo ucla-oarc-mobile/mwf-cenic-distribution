@@ -10,12 +10,20 @@
 # docroot
 # 
 
+set -o pipefail  # trace ERR through pipes
+set -o errtrace  # trace ERR through 'time command' and other functions
+set -o nounset   ## set -u : exit the script if you try to use an uninitialised variable
+set -o errexit   ## set -e : exit the script if any statement returns a non-true return value
+
+
+TMPDIR=/tmp
+TEMPLATEDIR=./templates
 # the replace function that is used to replace the variables
 # used in a file or variable.
 function replace(){
-     replace_result=$(echo $1 | sed \
+     replace_result=$(echo $@ | sed \
      -e "s^\[\[path\]\]^${path}^g" \
-     -e "s^\[\[directory\]\]^${direcotry}^g" \
+     -e "s^\[\[directory\]\]^${directory}^g" \
      -e "s^\[\[site_url\]\]^${server_name}^g" \
      -e "s^\[\[url_path\]\]^${url_path}^g" \
      -e "s^\[\[site_name\]\]^${site_name}^g"\
@@ -55,5 +63,8 @@ declare -A UCLA=(
    [git_repository]="mwf-cenic"
    [url_path]="http://m.ucla.edu"
    [path]=""
+   [directory]=""
+   [site_name]="ucla.prod"
+   [server_aliases]=""
 )
 
