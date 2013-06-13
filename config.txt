@@ -1,7 +1,7 @@
 # 
 # so far, these are the files and variables used
-# path
-# directory
+# aliased_path
+# aliased_directory
 # site_url
 # url_path
 # path
@@ -28,8 +28,8 @@ TEMPLATEDIR=./templates
 # used in a file or variable.
 function replace(){
      replace_result=$(echo $@ | sed \
-     -e "s^\[\[path\]\]^${path}^g" \
-     -e "s^\[\[directory\]\]^${directory}^g" \
+     -e "s^\[\[aliased_path\]\]^${aliased_path}^g" \
+     -e "s^\[\[aliased_directory\]\]^${aliased_directory}^g" \
      -e "s^\[\[site_url\]\]^${server_name}^g" \
      -e "s^\[\[url_path\]\]^${url_path}^g" \
      -e "s^\[\[site_name\]\]^${site_name}^g"\
@@ -68,8 +68,8 @@ declare -A UCLA=(
    [git_user_ID]="StillSlippery"
    [git_repository]="mwf-cenic"
    [url_path]="http://m.ucla.edu"
-   [path]=""
-   [directory]=""
+   [aliased_path]=""
+   [aliased_directory]=""
    [site_name]="ucla.prod"
    [server_aliases]=""
 )
