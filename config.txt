@@ -12,8 +12,14 @@
 
 set -o pipefail  # trace ERR through pipes
 set -o errtrace  # trace ERR through 'time command' and other functions
-set -o nounset   ## set -u : exit the script if you try to use an uninitialised variable
-set -o errexit   ## set -e : exit the script if any statement returns a non-true return value
+function error() {
+    JOB="$0"              # job name
+    LASTLINE="$1"         # line of error occurrence
+    LASTERR="$2"          # error code
+    echo "ERROR in ${JOB} : line ${LASTLINE} with exit code ${LASTERR}"
+    exit 1
+}
+trap 'error ${LINENO} ${$?}' ERR
 
 
 TMPDIR=/tmp
