@@ -69,7 +69,7 @@ do
          replace $line
        done < $TEMPLATEDIR/$file_base >> $TMPDIR/${file_base}.tmp
 # move the file into place
-       if [ $file_base = "alias.conf" ] && [ $(eval wc -l $TMPDIR/${file_base}.tmp | awk '{print $1}') = 1 ] 
+       if [ $file_base = "alias.conf" ] && [ $(eval wc -w $TMPDIR/${file_base}.tmp | awk '{print $1}') = 1 ] 
          then
            if [ $DEBUG ] ; then echo "$file_base not empty, installing" ; fi
 #     mv $TMPDIR/${file_base}.tmp $file_in
