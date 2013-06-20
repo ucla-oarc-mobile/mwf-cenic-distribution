@@ -1,7 +1,6 @@
 #!/bin/bash
-# This is basically the "mirror" of the install_hosts.bash script. This will remove the config
-# files and will remove a host files.  "remove" will actually remove the directory 
-# tree that is the MWF instance. 
+# This is basically the "mirror" of the install_hosts.bash script. This will disable a host by removing the config
+# files but will leave the MWF instance files alone.  "disable" will basically make the MWF instance invisible to Apache
 # 
 
 # get the source directory of this script to source the config.txt file first thing.  This is 
@@ -41,13 +40,13 @@ unset DEBUG
 echo "Starting.."
 if [ $DEBUG ] ; then echo "Debuging on..." ; fi
 
-# walk thru the hosts in $HOSTS and process the ones marked "remove"
+# walk thru the hosts in $HOSTS and process the ones makred "disable"
 for host in "${!HOSTS[@]}"
 do
   if [ $DEBUG ] ; then echo -n "$host is ";  fi
-  if [ ${HOSTS[$host]} = "remove" ]
+  if [ ${HOSTS[$host]} = "disable" ]
   then
-    if [ $DEBUG ] ; then echo "REMOVE" ; fi
+    if [ $DEBUG ] ; then echo "DISABLED" ; fi
 # 
     assoc_array_string=$(declare -p $host)
     if [ $DEBUG ] ; then echo "associative array for the host $host is defined with \"$assoc_array_string\""; fi
@@ -82,7 +81,7 @@ do
        fi
        done
   else
-   if [ $DEBUG ] ; then echo "not removing" ; fi
+   if [ $DEBUG ] ; then echo "not disabling" ; fi
   fi
 done  
 
