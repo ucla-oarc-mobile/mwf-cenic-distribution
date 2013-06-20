@@ -66,8 +66,6 @@ do
         if [ $DEBUG ] ; then echo ./templates/$file_base goes to  $(replace ${config_files[$file_base]}) ; fi
         if [ $DEBUG ] ; then echo "base = $file_base , file = $file_in" ; fi
 # process template files ($TEMPLATEDIR/$file_base) and put them into the temp directory with the names $file_base.tmp
-# remove the temp file before writing into it
-     if [ -f $TMPDIR/${file_base}.tmp ] ; then rm $TMPDIR/${file_base}.tmp ; fi
      while read line
        do
          replace $line
