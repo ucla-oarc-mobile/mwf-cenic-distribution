@@ -1,7 +1,7 @@
 #!/bin/bash
 # This is basically the "mirror" of the install_hosts.bash script. This will remove the config
-# files and will "deactivate" or "remove" a host.  "remove" will actually remove the directory 
-# tree that is the MWF instance. "deactivate" will just remove the config files making it "invisible" to apache.
+# files and will remove a host files.  "remove" will actually remove the directory 
+# tree that is the MWF instance. 
 # get the source directory of this script to source the config.txt file first thing.  This is 
 # convoluted to follow synlinks, etc
 
