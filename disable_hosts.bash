@@ -1,10 +1,9 @@
 #!/bin/bash
-# This is basically the "mirror" of the install_hosts.bash script. This will disable a host by removing the config
-# files but will leave the MWF instance files alone.  "disable" will basically make the MWF instance invisible to Apache
-# 
-
 # get the source directory of this script to source the config.txt file first thing.  This is 
 # convoluted to follow synlinks, etc
+
+unset DEBUG
+#DEBUG=true
 
 SOURCE="${BASH_SOURCE[0]}"
 # resolve $SOURCE until the file is no longer a symlink
@@ -34,19 +33,16 @@ fi
 # in addition to the error trap routine that needs to be sourced first thing
 . $DIR/config.txt
 
-unset DEBUG
-#DEBUG=true
-
 echo "Starting.."
 if [ $DEBUG ] ; then echo "$LINENO: Debuging on..." ; fi
 
-# walk thru the hosts in $HOSTS and process the ones makred "disable" or "remove"
+# walk thru the hosts in $HOSTS and process the ones not makred "active"
 for host in "${!HOSTS[@]}"
 do
   if [ $DEBUG ] ; then echo -n "$LINENO: $host is ";  fi
-  if [ ${HOSTS[$host]} = "disable" ] || [ ${HOSTS[$host]} = "remove" ]
+  if [ ${HOSTS[$host]} != "active" ] 
   then
-    if [ $DEBUG ] ; then echo "disabling " ; fi
+    if [ $DEBUG ] ; then echo "disabling" ; fi
 # 
     assoc_array_string=$(declare -p $host)
     if [ $DEBUG ] ; then echo "$LINENO: associative array for the host $host is defined with \"$assoc_array_string\""; fi
@@ -63,23 +59,26 @@ do
        do
         if [ $DEBUG ] ; then echo "$LINENO: Original config string " ${config_files[$file_base]} ; fi
         file_in=$(replace ${config_files[$file_base]})
-        if [ $DEBUG ] ; then echo "./templates/$file_base goes to  $(replace ${config_files[$file_base]})" ; fi
+        if [ $DEBUG ] ; then echo ./templates/$file_base goes to  $(replace ${config_files[$file_base]}) ; fi
         if [ $DEBUG ] ; then echo "$LINENO: base = $file_base , file = $file_in" ; fi
 # process template files ($TEMPLATEDIR/$file_base) and put them into the temp directory with the names $file_base.tmp
-     while read line
-       do
-         replace $line
-# delete config files
-       if [ -f $file_in ] 
+# remove the temp file before writing into it
+     if [ -f $TMPDIR/${file_base}.tmp ] ; then rm $TMPDIR/${file_base}.tmp ; fi
+#     while read line
+#       do
+#         replace $line
+#       done < $TEMPLATEDIR/$file_base >> $TMPDIR/${file_base}.tmp
+# move the file into place
+       if [ -f $file_in ]
          then
-          if [ $DEBUG ] ; then echo "$LINENO: Deleting $file_in " ; fi
+           if [ $DEBUG ] ; then echo "$LINENO: $file_in exists, removing" ; fi
 #     rm -f $file_in
          else
-          if [ $DEBUG ] ; then echo "$LINENO: File $file_in , does not exist, skipping" ; fi
+          if [ $DEBUG ] ; then echo "$LINENO: $file_in does not exist, skipping" ; fi
        fi
        done
   else
-   if [ $DEBUG ] ; then echo "$LINENO: not disabling" ; fi
+   if [ $DEBUG ] ; then echo "$LINENO: active" ; fi
   fi
 done  
 
