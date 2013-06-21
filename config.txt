@@ -56,8 +56,8 @@ declare -A HOSTS
 HOSTS=(
    [UCLA]=active
    [UCSB]=inactive
-   [UCB]=inactive
-   [UCSD]=inactive
+   [UCB]=disable
+   [UCSD]=remove
 )
 
 # a host definition the array name much match the HOSTS index exactly
@@ -66,7 +66,7 @@ declare -A UCLA=(
    [server_name]="m.ucla.edu"
    [docroot]="/var/www/html/mwf/ucla.prod"
    [git_user_ID]="StillSlippery"
-   [git_repository]="mwf-cenic"
+   [git_repository]="https://[[git_user_ID]]github.com/ucla/mobile13.git"
    [url_path]="http://m.ucla.edu"
    [aliased_path]=""
    [aliased_directory]=""
@@ -74,3 +74,40 @@ declare -A UCLA=(
    [server_aliases]=""
 )
 
+declare -A UCSB=(
+   [host]="UCSB"
+   [server_name]="m.ucsb.edu"
+   [docroot]="/var/www/html/mwf/ucsb.prod"
+   [git_user_ID]="StillSlippery"
+   [git_repository]="https://[[git_user_ID]]github.com/ucla/mobile13.git"
+   [url_path]="http://m.ucsb.edu"
+   [aliased_path]=""
+   [aliased_directory]=""
+   [site_name]="ucsb.prod"
+   [server_aliases]=""
+)
+
+declare -A UCB=(
+   [host]="UCLA"
+   [server_name]="m.berkeley.edu"
+   [docroot]="/var/www/html/mwf/berkeley.prod"
+   [git_user_ID]="https://[[git_user_ID]]github.com/ucla/mobile13.git"
+   [git_repository]="mwf-cenic"
+   [url_path]="http://m.berkeley.edu"
+   [aliased_path]=""
+   [aliased_directory]=""
+   [site_name]="berkeley.prod"
+   [server_aliases]=""
+)
+declare -A UCSD=(
+   [host]="UCSD"
+   [server_name]="m.ucsb.edu"
+   [docroot]="/var/www/html/mwf/ucsb.prod"
+   [git_user_ID]="StillSlippery"
+   [git_repository]="https://[[git_user_ID]]github.com/ucla/mobile13.git"
+   [url_path]="http://m.ucsb.edu"
+   [aliased_path]=""
+   [aliased_directory]=""
+   [site_name]="ucsb.prod"
+   [server_aliases]=""
+)
