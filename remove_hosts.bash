@@ -4,7 +4,7 @@
 # tree that is the MWF instance. 
 # 
 
-unset DEBUG
+#unset DEBUG
 #DEBUG=true
 
 # get the source directory of this script to source the config.txt file first thing.  This is 

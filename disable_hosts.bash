@@ -2,7 +2,7 @@
 # get the source directory of this script to source the config.txt file first thing.  This is 
 # convoluted to follow synlinks, etc
 
-unset DEBUG
+#unset DEBUG
 #DEBUG=true
 
 SOURCE="${BASH_SOURCE[0]}"
