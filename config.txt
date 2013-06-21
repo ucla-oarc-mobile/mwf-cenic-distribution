@@ -8,6 +8,8 @@
 # server_name
 # server_aliases
 # docroot
+# git_user_ID
+# git_repository
 # 
 
 set -o pipefail  # trace ERR through pipes
@@ -36,6 +38,8 @@ function replace(){
      -e "s^\[\[server_aliases\]\]^${server_aliases}^g" \
      -e "s^\[\[docroot\]\]^${docroot}^g" \
      -e "s^\[\[server_name\]\]^${server_name}^g" \
+     -e "s^\[\[git_user_ID\]\]^${git_user_ID}^g"  \
+     -e "s^\[\[git_repository\]\]^${git_repository}^g"  \
      -e "s^\[\[host\]\]^${host}^g" )
      echo $replace_result
 }
@@ -56,8 +60,8 @@ declare -A HOSTS
 HOSTS=(
    [UCLA]=active
    [UCSB]=inactive
-   [UCB]=disable
-   [UCSD]=remove
+   [UCB]=inactive
+   [UCSD]=inactive
 )
 
 # a host definition the array name much match the HOSTS index exactly
@@ -66,7 +70,7 @@ declare -A UCLA=(
    [server_name]="m.ucla.edu"
    [docroot]="/var/www/html/mwf/ucla.prod"
    [git_user_ID]="StillSlippery"
-   [git_repository]="https://[[git_user_ID]]github.com/ucla/mobile13.git"
+   [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [url_path]="http://m.ucla.edu"
    [aliased_path]=""
    [aliased_directory]=""
@@ -79,7 +83,7 @@ declare -A UCSB=(
    [server_name]="m.ucsb.edu"
    [docroot]="/var/www/html/mwf/ucsb.prod"
    [git_user_ID]="StillSlippery"
-   [git_repository]="https://[[git_user_ID]]github.com/ucla/mobile13.git"
+   [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [url_path]="http://m.ucsb.edu"
    [aliased_path]=""
    [aliased_directory]=""
@@ -91,7 +95,7 @@ declare -A UCB=(
    [host]="UCLA"
    [server_name]="m.berkeley.edu"
    [docroot]="/var/www/html/mwf/berkeley.prod"
-   [git_user_ID]="https://[[git_user_ID]]github.com/ucla/mobile13.git"
+   [git_user_ID]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [git_repository]="mwf-cenic"
    [url_path]="http://m.berkeley.edu"
    [aliased_path]=""
@@ -104,7 +108,7 @@ declare -A UCSD=(
    [server_name]="m.ucsb.edu"
    [docroot]="/var/www/html/mwf/ucsb.prod"
    [git_user_ID]="StillSlippery"
-   [git_repository]="https://[[git_user_ID]]github.com/ucla/mobile13.git"
+   [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [url_path]="http://m.ucsb.edu"
    [aliased_path]=""
    [aliased_directory]=""

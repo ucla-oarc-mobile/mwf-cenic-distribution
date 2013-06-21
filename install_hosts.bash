@@ -42,7 +42,7 @@ do
   if [ $DEBUG ] ; then echo -n "$LINENO: $host is ";  fi
   if [ ${HOSTS[$host]} = "active" ]
   then
-    if [ $DEBUG ] ; then echo "ACTIVE" ; fi
+    echo "$host is active"
 # 
     assoc_array_string=$(declare -p $host)
     if [ $DEBUG ] ; then echo "$LINENO: associative array for the host $host is defined with \"$assoc_array_string\""; fi
@@ -69,18 +69,24 @@ do
          replace $line
        done < $TEMPLATEDIR/$file_base >> $TMPDIR/${file_base}.tmp
 # move the file into place
-       if [ $file_base = "alias.conf" ] && [ $(eval wc -w $TMPDIR/${file_base}.tmp | awk '{print $1}') = 1 ] 
+# if alias.conf file is empty, skip it
+       if [ "$file_base" = "alias.conf" ] 
          then
-           if [ $DEBUG ] ; then echo "$LINENO: $file_base not empty, installing" ; fi
-#     mv $TMPDIR/${file_base}.tmp $file_in
-         else
-          if [ $DEBUG ] ; then echo "$LINENO: Empty $file_base , skipping" ; fi
+           if [ "$(eval wc -w $TMPDIR/${file_base}.tmp | awk '{print $1}')" -ne 1 ]
+             then 
+               if [ $DEBUG ] ; then echo "$LINENO: $file_base not empty, installing" ; fi
+#               mv $TMPDIR/${file_base}.tmp $file_in
+              else
+                if [ $DEBUG ] ; then echo "$LINENO: Empty $file_base , skipping" ; fi
+           fi
        fi
 # remove .tmp files
-#    if [ -f $TMPDIR/${file_base}.tmp ] ; then rm $TMPDIR/${file_base}.tmp ; fi
+       if [ -f $TMPDIR/${file_base}.tmp ] ; then rm $TMPDIR/${file_base}.tmp ; fi
        done
+     echo cd $docroot
+     echo git pull $(replace $git_repository) for $host
   else
-   if [ $DEBUG ] ; then echo "$LINENO: NOT active" ; fi
+   echo "$host NOT active" 
   fi
 done  
 
