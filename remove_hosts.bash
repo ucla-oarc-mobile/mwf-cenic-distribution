@@ -74,8 +74,4 @@ do
   fi
 done  
 
-echo "done."
-
-exit
-
-echo "Better never get here"
+echo "remove_hosts done."

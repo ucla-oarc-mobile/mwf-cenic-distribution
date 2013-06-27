@@ -75,23 +75,32 @@ do
            if [ "$(eval wc -w $TMPDIR/${file_base}.tmp | awk '{print $1}')" -ne 1 ]
              then 
                if [ $DEBUG ] ; then echo "$LINENO: $file_base not empty, installing" ; fi
-#               mv $TMPDIR/${file_base}.tmp $file_in
-              else
+               echo mv $TMPDIR/${file_base}.tmp $file_in
+             else
                 if [ $DEBUG ] ; then echo "$LINENO: Empty $file_base , skipping" ; fi
            fi
+         else
+           echo mv $TMPDIR/${file_base}.tmp $file_in
        fi
 # remove .tmp files
        if [ -f $TMPDIR/${file_base}.tmp ] ; then rm $TMPDIR/${file_base}.tmp ; fi
        done
-     echo cd $docroot
-     echo git pull $(replace $git_repository) for $host
+     if [ ! -d $docroot ] 
+       then 
+         mkdir -p $docroot
+         pushd $docroot
+         git init
+         git remote add base $(replace $git_repository)
+         git pull base master
+         popd
+       else
+         pushd $docroot
+         git pull $(replace $git_repository)
+         popd
+       fi
   else
    echo "$host NOT active" 
   fi
 done  
 
-echo "done."
-
-exit
-
-echo "Better never get here"
+echo "install_hosts done."

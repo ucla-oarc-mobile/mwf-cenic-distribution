@@ -82,8 +82,5 @@ do
   fi
 done  
 
-echo "done."
+echo "disable_hosts done."
 
-exit
-
-echo "Better never get here"

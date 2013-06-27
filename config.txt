@@ -14,6 +14,7 @@
 
 set -o pipefail  # trace ERR through pipes
 set -o errtrace  # trace ERR through 'time command' and other functions
+
 function error() {
     JOB="$0"              # job name
     LASTLINE="$1"         # line of error occurrence
@@ -68,7 +69,8 @@ HOSTS=(
 declare -A UCLA=(
    [host]="UCLA"
    [server_name]="m.ucla.edu"
-   [docroot]="/var/www/html/mwf/ucla.prod"
+#   [docroot]="/var/www/html/mwf/ucla.prod"
+   [docroot]="/tmp/ets/html/mwf/ucla.prod"
    [git_user_ID]="StillSlippery"
    [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [url_path]="http://m.ucla.edu"
