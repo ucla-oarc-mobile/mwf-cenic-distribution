@@ -47,6 +47,7 @@ $DIR/remove_hosts.bash
 
 
 if [ $DEBUG ] ; then echo "$LINENO: Done"; fi
+
 exit
 
 echo "Better never get here"

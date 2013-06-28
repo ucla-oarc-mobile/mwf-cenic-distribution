@@ -33,6 +33,25 @@ fi
 # in addition to the error trap routine that needs to be sourced first thing
 . $DIR/config.txt
 
+
+comp_and_install () {
+
+  file_one="$1"
+  file_two="$2"
+  if [ -z "$file_one" ] || [ -z "$file_two" ] ; then exit ; fi
+   if [ -f "$file_one" ] && [ -f "$file_two" ] 
+     then
+       cmp -s  $file_one $file_two > /dev/null
+       if [ $? -eq 0 ] ; then
+	 echo mv $file_one $file_two
+       else
+	 echo $file_one and $file_two are identical
+       fi
+     else
+       echo mv $file_one $file_two
+   fi
+}
+
 echo "Starting.."
 if [ $DEBUG ] ; then echo "$LINENO: Debuging on..." ; fi
 
@@ -75,12 +94,12 @@ do
            if [ "$(eval wc -w $TMPDIR/${file_base}.tmp | awk '{print $1}')" -ne 1 ]
              then 
                if [ $DEBUG ] ; then echo "$LINENO: $file_base not empty, installing" ; fi
-               echo mv $TMPDIR/${file_base}.tmp $file_in
+               comp_and_install "$TMPDIR/${file_base}.tmp" "$file_in" 
              else
                 if [ $DEBUG ] ; then echo "$LINENO: Empty $file_base , skipping" ; fi
            fi
          else
-           echo mv $TMPDIR/${file_base}.tmp $file_in
+           comp_and_install "$TMPDIR/${file_base}.tmp" "$file_in" 
        fi
 # remove .tmp files
        if [ -f $TMPDIR/${file_base}.tmp ] ; then rm $TMPDIR/${file_base}.tmp ; fi
