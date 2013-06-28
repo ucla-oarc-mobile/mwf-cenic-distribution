@@ -38,16 +38,16 @@ comp_and_install () {
 
   file_one="$1"
   file_two="$2"
-  if [ -z "$file_one" ] || [ -z "$file_two" ] ; then exit ; fi
+  if [ -z "$file_one" ] || [ -z "$file_two" ] ; then echo "comp_and_install needs two parameters" ; return 1; fi
    if [ -f "$file_one" ] && [ -f "$file_two" ] 
      then
-       cmp -s  $file_one $file_two > /dev/null
-       if [ $? -eq 0 ] ; then
-	 echo mv $file_one $file_two
-       else
+       if [ -z "$(eval diff -q  $file_one $file_two)" ] ; then
 	 echo $file_one and $file_two are identical
+       else
+	 echo mv $file_one $file_two
        fi
      else
+# this will throw an exception and die if the path doesn't exist
        echo mv $file_one $file_two
    fi
 }
@@ -73,9 +73,27 @@ do
         if [ $DEBUG ] ; then echo host variable = $new_host_array[$X] ; fi
         eval $X=${new_host_array[$X]}
       done
+
+# need to do the git stuff before the config files
+echo git stuff...
+     if [ ! -d $docroot ] 
+       then 
+         mkdir -p $docroot
+         pushd $docroot
+         git init
+         git remote add base $(replace $git_repository)
+         git pull base master
+         popd
+       else
+         pushd $docroot
+         git pull $(replace $git_repository)
+         popd
+       fi
     
+# need to do the git stuff before the config files incase git writes over stuff
      for file_base in ${!config_files[@]}
        do
+echo config
         if [ $DEBUG ] ; then echo "$LINENO: Original config string " ${config_files[$file_base]} ; fi
         file_in=$(replace ${config_files[$file_base]})
         if [ $DEBUG ] ; then echo ./templates/$file_base goes to  $(replace ${config_files[$file_base]}) ; fi
@@ -104,6 +122,8 @@ do
 # remove .tmp files
        if [ -f $TMPDIR/${file_base}.tmp ] ; then rm $TMPDIR/${file_base}.tmp ; fi
        done
+
+echo git stuff...
      if [ ! -d $docroot ] 
        then 
          mkdir -p $docroot

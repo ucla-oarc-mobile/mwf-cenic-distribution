@@ -8,6 +8,7 @@
 # server_name
 # server_aliases
 # docroot
+# apache_config
 # git_user_ID
 # git_repository
 # 
@@ -38,6 +39,7 @@ function replace(){
      -e "s^\[\[site_name\]\]^${site_name}^g"\
      -e "s^\[\[server_aliases\]\]^${server_aliases}^g" \
      -e "s^\[\[docroot\]\]^${docroot}^g" \
+     -e "s^\[\[apache_config\]\]^${apache_config}^g" \
      -e "s^\[\[server_name\]\]^${server_name}^g" \
      -e "s^\[\[git_user_ID\]\]^${git_user_ID}^g"  \
      -e "s^\[\[git_repository\]\]^${git_repository}^g"  \
@@ -71,6 +73,7 @@ declare -A UCLA=(
    [server_name]="m.ucla.edu"
 #   [docroot]="/var/www/html/mwf/ucla.prod"
    [docroot]="/tmp/ets/html/mwf/ucla.prod"
+   [apache_config]="/tmp/etc/httpd/conf.d"
    [git_user_ID]="StillSlippery"
    [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [url_path]="http://m.ucla.edu"
@@ -84,6 +87,7 @@ declare -A UCSB=(
    [host]="UCSB"
    [server_name]="m.ucsb.edu"
    [docroot]="/var/www/html/mwf/ucsb.prod"
+   [apache_config]="/etc/httpd/conf.d"
    [git_user_ID]="StillSlippery"
    [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [url_path]="http://m.ucsb.edu"
@@ -97,6 +101,7 @@ declare -A UCB=(
    [host]="UCLA"
    [server_name]="m.berkeley.edu"
    [docroot]="/var/www/html/mwf/berkeley.prod"
+   [apache_config]="/etc/httpd/conf.d"
    [git_user_ID]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [git_repository]="mwf-cenic"
    [url_path]="http://m.berkeley.edu"
@@ -109,6 +114,7 @@ declare -A UCSD=(
    [host]="UCSD"
    [server_name]="m.ucsb.edu"
    [docroot]="/var/www/html/mwf/ucsb.prod"
+   [apache_config]="/etc/httpd/conf.d"
    [git_user_ID]="StillSlippery"
    [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [url_path]="http://m.ucsb.edu"
