@@ -44,11 +44,11 @@ comp_and_install () {
        if [ -z "$(eval diff -q  $file_one $file_two)" ] ; then
 	 echo $file_one and $file_two are identical
        else
-	 echo mv $file_one $file_two
+	 mv $file_one $file_two
        fi
      else
 # this will throw an exception and die if the path doesn't exist
-       echo mv $file_one $file_two
+       mv $file_one $file_two
    fi
 }
 
@@ -90,7 +90,7 @@ echo git stuff...
          popd
        fi
     
-# need to do the git stuff before the config files incase git writes over stuff
+# config files incase git writes over stuff
      for file_base in ${!config_files[@]}
        do
 echo config
@@ -122,21 +122,6 @@ echo config
 # remove .tmp files
        if [ -f $TMPDIR/${file_base}.tmp ] ; then rm $TMPDIR/${file_base}.tmp ; fi
        done
-
-echo git stuff...
-     if [ ! -d $docroot ] 
-       then 
-         mkdir -p $docroot
-         pushd $docroot
-         git init
-         git remote add base $(replace $git_repository)
-         git pull base master
-         popd
-       else
-         pushd $docroot
-         git pull $(replace $git_repository)
-         popd
-       fi
   else
    echo "$host NOT active" 
   fi
