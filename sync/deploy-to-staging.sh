@@ -1,5 +1,9 @@
 #!/bin/bash
-MWF_BASE=/var/www/mwf_dedicated
+#MWF_BASE=/var/www/mwf_dedicated
+#MWF_APACHE_CONFIGS1=/etc/httpd/sites-enabled/
+#MWF_APACHE_CONFIGS2=/etc/httpd/sites-available/
+
+MWF_BASE=/var/www/html/mwf/ucla.stage
 MWF_APACHE_CONFIGS1=/etc/httpd/sites-enabled/
 MWF_APACHE_CONFIGS2=/etc/httpd/sites-available/
 tar czvf /deploy/Staging-mwf-current.tgz $MWF_BASE
