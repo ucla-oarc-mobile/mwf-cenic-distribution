@@ -8,7 +8,9 @@
 # server_name
 # server_aliases
 # docroot
-# apache_config
+# apache_available_config
+# apache_enabled_config
+# site_log_path
 # git_user_ID
 # git_repository
 # 
