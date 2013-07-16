@@ -39,7 +39,9 @@ function replace(){
      -e "s^\[\[site_name\]\]^${site_name}^g"\
      -e "s^\[\[server_aliases\]\]^${server_aliases}^g" \
      -e "s^\[\[docroot\]\]^${docroot}^g" \
-     -e "s^\[\[apache_config\]\]^${apache_config}^g" \
+     -e "s^\[\[apache_available_config\]\]^${apache_available_config}^g" \
+     -e "s^\[\[apache_enabled_config\]\]^${apache_enabled_config}^g" \
+     -e "s^\[\[site_log_path\]\]^${site_log_path}^g" \
      -e "s^\[\[server_name\]\]^${server_name}^g" \
      -e "s^\[\[git_user_ID\]\]^${git_user_ID}^g"  \
      -e "s^\[\[git_repository\]\]^${git_repository}^g"  \
@@ -70,10 +72,11 @@ HOSTS=(
 # a host definition the array name much match the HOSTS index exactly
 declare -A UCLA=(
    [host]="UCLA"
-   [server_name]="m.ucla.edu"
-#   [docroot]="/var/www/html/mwf/ucla.prod"
-   [docroot]="/tmp/ets/html/mwf/ucla.prod"
-   [apache_config]="/tmp/etc/httpd/conf.d"
+   [server_name]="*"
+   [docroot]="/var/www/mwf/ucla.prod"
+   [apache_available_config]="/etc/httpd/sites-available/ucla.conf"
+   [apache_enabled_config]="/etc/httpd/sites-enabled/ucla.conf"
+   [site_log_path]="/var/log/httpd/ucla-default"
    [git_user_ID]="StillSlippery"
    [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [url_path]="http://m.ucla.edu"
