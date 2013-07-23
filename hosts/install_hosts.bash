@@ -29,8 +29,9 @@ fi
  if [ $DEBUG ] ; then echo "$LINENO: DIR is '$DIR'" ; fi
 
 #
-# configuration and replace function are in the config.txt file that is sourced below
-# in addition to the error trap routine that needs to be sourced first thing
+# configuration and replace function are in the config.txt
+# file that is sourced below in addition to the error trap
+# routine that needs to be sourced first thing
 . $DIR/config.txt
 
 

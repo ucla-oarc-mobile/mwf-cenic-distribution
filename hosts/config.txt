@@ -61,7 +61,7 @@ config_files=(
   )
 
 # Hosts array
-# [hostname]=status (active|inactive) 
+# [hostname]=status (active|inactive|remove) 
 # anything other than active is considered inactive and ignored
 declare -A HOSTS
 HOSTS=(
