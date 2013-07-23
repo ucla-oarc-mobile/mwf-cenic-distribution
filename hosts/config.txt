@@ -66,6 +66,7 @@ config_files=(
 declare -A HOSTS
 HOSTS=(
    [UCLA]=active
+   [UCLA-CENIC]=active
    [UCSB]=inactive
    [UCB]=inactive
    [UCSD]=inactive
@@ -74,8 +75,8 @@ HOSTS=(
 # a host definition the array name much match the HOSTS index exactly
 declare -A UCLA=(
    [host]="UCLA"
-   [server_name]="*"
-   [docroot]="/var/www/mwf/ucla.prod"
+   [server_name]="m.ucla.edu"
+   [docroot]="/var/www/mwf/ucla.stage"
    [apache_available_config]="/etc/httpd/sites-available/ucla.conf"
    [apache_enabled_config]="/etc/httpd/sites-enabled/ucla.conf"
    [site_log_path]="/var/log/httpd/ucla-default"
@@ -84,7 +85,23 @@ declare -A UCLA=(
    [url_path]="http://m.ucla.edu"
    [aliased_path]=""
    [aliased_directory]=""
-   [site_name]="ucla.prod"
+   [site_name]="ucla.stage"
+   [server_aliases]=""
+)
+
+declare -A UCLA-CENIC=(
+   [host]="UCLA-CENIC"
+   [server_name]="ucla.mwf.cenic.org"
+   [docroot]="/var/www/mwf/ucla.cenic.stage"
+   [apache_available_config]="/etc/httpd/sites-available/ucla.cenic.conf"
+   [apache_enabled_config]="/etc/httpd/sites-enabled/ucla.cenic.conf"
+   [site_log_path]="/var/log/httpd/ucla-cenic-default"
+   [git_user_ID]="StillSlippery"
+   [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
+   [url_path]="http://m.ucla.edu"
+   [aliased_path]=""
+   [aliased_directory]=""
+   [site_name]="ucla.cenic"
    [server_aliases]=""
 )
 
