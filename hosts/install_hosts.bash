@@ -72,7 +72,7 @@ do
     for X in "${!new_host_array[@]}"
       do
         if [ $DEBUG ] ; then echo host variable = $new_host_array[$X] ; fi
-        eval $X=${new_host_array[$X]}
+        declare $X="${new_host_array[$X]}"
       done
 
 # need to do the git stuff before the config files

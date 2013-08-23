@@ -41,6 +41,7 @@ function replace(){
      -e "s^\[\[site_name\]\]^${site_name}^g"\
      -e "s^\[\[server_aliases\]\]^${server_aliases}^g" \
      -e "s^\[\[docroot\]\]^${docroot}^g" \
+     -e "s^\[\[path\]\]^${path}^g" \
      -e "s^\[\[apache_available_config\]\]^${apache_available_config}^g" \
      -e "s^\[\[apache_enabled_config\]\]^${apache_enabled_config}^g" \
      -e "s^\[\[site_log_path\]\]^${site_log_path}^g" \
@@ -55,9 +56,9 @@ function replace(){
 # can include replaceable variables like [[docroot]]
 declare -A config_files
 config_files=(
-   [alias.conf]='/etc/httpd/conf.d/[[host]]-alias.conf'
+   [alias.conf]='/etc/httpd/sites-available/[[host]]-alias.conf'
    [base.ini]='[[docroot]]/config/base.ini'
-   [virtualhost.conf]='/etc/httpd/conf.d/[[host]]-vhost.conf'
+   [virtualhost.conf]='[[apache_available_config]]'
   )
 
 # Hosts array
@@ -66,42 +67,61 @@ config_files=(
 declare -A HOSTS
 HOSTS=(
    [UCLA]=active
-   [UCLA-CENIC]=active
-   [UCSB]=inactive
-   [UCB]=inactive
-   [UCSD]=inactive
+   [UCLA_12]=active
+   [UCSB]=remove
+   [UCB]=remove
+   [UCSD]=remove
 )
 
 # a host definition the array name much match the HOSTS index exactly
+#declare -A UCLA=(
+#   [host]="UCLA"
+#   [server_name]="m.ucla.edu"
+#   [docroot]="/var/www/mwf/ucla.stage"
+#   [path]=""
+#   [apache_available_config]="/etc/httpd/sites-available/UCLA-vhost.conf"
+#   [apache_enabled_config]="/etc/httpd/sites-enabled/UCLA-vhost.conf"
+#   [site_log_path]="/var/log/httpd/ucla-default"
+#   [git_user_ID]="StillSlippery"
+#   [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
+#   [url_path]="http://m.ucla.edu"
+#   [aliased_path]=""
+#   [aliased_directory]=""
+#   [site_name]="ucla.stage"
+#   [server_aliases]=""
+#)
+
 declare -A UCLA=(
    [host]="UCLA"
-   [server_name]="m.ucla.edu"
+   [server_name]="ucla.mwf.cenic.org"
    [docroot]="/var/www/mwf/ucla.stage"
-   [apache_available_config]="/etc/httpd/sites-available/ucla.conf"
-   [apache_enabled_config]="/etc/httpd/sites-enabled/ucla.conf"
+   [path]=""
+   [apache_available_config]="/etc/httpd/sites-available/UCLA-vhost.conf"
+   [apache_enabled_config]="/etc/httpd/sites-enabled/UCLA-vhost.conf"
    [site_log_path]="/var/log/httpd/ucla-default"
    [git_user_ID]="StillSlippery"
    [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
-   [url_path]="http://m.ucla.edu"
+   [url_path]="http://ucla.mwf.cenic.org"
    [aliased_path]=""
    [aliased_directory]=""
    [site_name]="ucla.stage"
    [server_aliases]=""
 )
 
-declare -A UCLA-CENIC=(
-   [host]="UCLA-CENIC"
-   [server_name]="ucla.mwf.cenic.org"
-   [docroot]="/var/www/mwf/ucla.cenic.stage"
-   [apache_available_config]="/etc/httpd/sites-available/ucla.cenic.conf"
-   [apache_enabled_config]="/etc/httpd/sites-enabled/ucla.cenic.conf"
-   [site_log_path]="/var/log/httpd/ucla-cenic-default"
+declare -A UCLA_12=(
+   [host]="UCLA_12"
+   [server_name]="m.ucla.edu"
+   [docroot]="/var/www/mwf/ucla_12.stage"
+   [path]=""
+   [apache_available_config]="/etc/httpd/sites-available/UCLA_12-vhost.conf"
+   [apache_enabled_config]="/etc/httpd/sites-enabled/UCLA_12-vhost.conf"
+   [site_log_path]="/var/log/httpd/ucla_12-default"
    [git_user_ID]="StillSlippery"
-   [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
+   [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile.git"
    [url_path]="http://m.ucla.edu"
-   [aliased_path]=""
+   [aliased_path]='/12 /var/www/mwf/ucla_12.stage/root'
    [aliased_directory]=""
-   [site_name]="ucla.cenic"
+   [site_name]="ucla_12.stage"
    [server_aliases]=""
 )
 
@@ -109,6 +129,7 @@ declare -A UCSB=(
    [host]="UCSB"
    [server_name]="m.ucsb.edu"
    [docroot]="/var/www/html/mwf/ucsb.prod"
+   [path]=""
    [apache_config]="/etc/httpd/conf.d"
    [git_user_ID]="StillSlippery"
    [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
@@ -123,6 +144,7 @@ declare -A UCB=(
    [host]="UCLA"
    [server_name]="m.berkeley.edu"
    [docroot]="/var/www/html/mwf/berkeley.prod"
+   [path]=""
    [apache_config]="/etc/httpd/conf.d"
    [git_user_ID]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
    [git_repository]="mwf-cenic"
@@ -136,6 +158,7 @@ declare -A UCSD=(
    [host]="UCSD"
    [server_name]="m.ucsb.edu"
    [docroot]="/var/www/html/mwf/ucsb.prod"
+   [path]=""
    [apache_config]="/etc/httpd/conf.d"
    [git_user_ID]="StillSlippery"
    [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"

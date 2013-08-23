@@ -3,7 +3,7 @@
 # convoluted to follow synlinks, etc
 
 unset DEBUG
-#export DEBUG=true
+export DEBUG=true
 
 SOURCE="${BASH_SOURCE[0]}"
 # resolve $SOURCE until the file is no longer a symlink
