@@ -14,6 +14,7 @@ do
 
   for i in `/usr/local/bin/instance-info2.sh -t Staging -s mwf`
   do
+    echo doing a -- rsync -e "ssh -i /root/cenic-mwf.pem" --del -a -r $MWF_BASE/* root@$i:$MWF_BASE/
     rsync -e "ssh -i /root/cenic-mwf.pem" --del -a -r $MWF_BASE/* root@$i:$MWF_BASE/
   done
 done
@@ -22,6 +23,7 @@ for i in `/usr/local/bin/instance-info2.sh -t Staging -s mwf`
 do
   for MWF_http_config in $MWF_APACHE_CONFIGS
   do
+    echo doing a -- rsync -e "ssh -i /root/cenic-mwf.pem" --del -a -r $MWF_http_config root@$i:$MWF_http_config
     rsync -e "ssh -i /root/cenic-mwf.pem" --del -a -r $MWF_http_config root@$i:$MWF_http_config
   done
   ssh -i /root/cenic-mwf.pem root@$i "service httpd reload"

@@ -9,11 +9,12 @@ MWF_BASE_hosts="/var/www/mwf/ucla.production /var/www/mwf/ucla_12.production /va
 
 for MWF_BASE in $MWF_BASE_hosts 
 do
-  tar czvf /deploy/Production-mwf-current.tgz $MWF_BASE
-  cp /deploy/Production-mwf-current.tgz /var/www/html/
+#  tar czvf /deploy/Production-mwf-current.tgz $MWF_BASE
+#  cp /deploy/Production-mwf-current.tgz /var/www/html/
 
   for i in `/usr/local/bin/instance-info2.sh -t Production -s mwf`
   do
+    echo doing a -- rsync -e "ssh -i /root/cenic-mwf.pem" --del -a -r $MWF_BASE/* root@$i:$MWF_BASE/
     rsync -e "ssh -i /root/cenic-mwf.pem" --del -a -r $MWF_BASE/* root@$i:$MWF_BASE/
   done
 done
@@ -21,6 +22,7 @@ done
 for i in `/usr/local/bin/instance-info2.sh -t Production -s mwf`
 do
   for MWF_http_config in $MWF_APACHE_CONFIGS
+    echo doing a -- rsync -e "ssh -i /root/cenic-mwf.pem" --del -a -r $MWF_http_config root@$i:$MWF_http_config
     rsync -e "ssh -i /root/cenic-mwf.pem" --del -a -r $MWF_http_config root@$i:$MWF_http_config
   done
   ssh -i /root/cenic-mwf.pem root@$i "service httpd reload"
