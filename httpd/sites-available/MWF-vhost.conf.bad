@@ -1,0 +1,56 @@
+###
+###
+### Start of Port 80
+### 
+###
+
+#Listen 80
+NameVirtualHost *:80
+
+# Berkeley port 80 - start
+<VirtualHost *:80>
+  DocumentRoot /var/www/mwf/berkeley.stage
+  ServerName cenic-m.berkeley.edu
+  ServerAlias berkeley.mwf.cenic.org
+
+    <Directory /var/www/mwf/berkeley.stage>
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+    </Directory>
+
+  LogLevel info
+  ErrorLog /var/log/httpd/berkeley-default-error.log
+  CustomLog /var/log/httpd/berkeley-default-access.log vhost_combined
+</VirtualHost>
+
+# Berkeley port 80 - end
+
+# UCLA port 80 - start
+<VirtualHost *:80>
+  DocumentRoot /var/www/mwf/ucla.stage/root
+  ServerName m.ucla.edu
+  ServerAlias ucla.mwf.cenic.org
+
+  <Directory /var/www/mwf/ucla.stage/root>
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  Alias /12 /var/www/mwf/ucla_12.stage/root
+  <Directory /var/www/mwf/ucla_12.stage/root>
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  LogLevel info
+  ErrorLog /var/log/httpd/ucla-default-error.log
+  CustomLog /var/log/httpd/ucla-default-access.log vhost_combined
+</VirtualHost>
+
+# UCLA port 80 - end
