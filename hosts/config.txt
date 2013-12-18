@@ -69,7 +69,7 @@ HOSTS=(
    [UCLA]=active
    [UCLA_12]=active
    [UCSB]=remove
-   [UCB]=remove
+   [Berkeley]=remove
    [UCSD]=remove
 )
 
@@ -142,6 +142,23 @@ declare -A UCLA_12=(
 #   [server_aliases]=""
 #)
 
+declare -A Berkeley=(
+   [host]="Berkeley"
+   [server_name]="cenic-m.berkeley.edu"
+   [docroot]="/var/www/mwf/berkeley.stage"
+   [path]=""
+   [apache_available_config]="/etc/httpd/sites-available/berkeley-vhost.conf"
+   [apache_enabled_config]="/etc/httpd/sites-enabled/berkeley-vhost.conf"
+   [site_log_path]="/var/log/httpd/berkeley-default"
+   [git_user_ID]="StillSlippery"
+   [git_repository]="https://github.com/BerkeleyEdu/mwf.git"
+   [url_path]="http://cenic-m.berkeley.edu"
+   [aliased_path]='/12 /var/www/mwf/berkeley.stage/root'
+   [aliased_directory]=""
+   [site_name]="berkeley.stage"
+   [server_aliases]=""
+)
+
 declare -A UCSB=(
    [host]="UCSB"
    [server_name]="m.ucsb.edu"
@@ -157,20 +174,6 @@ declare -A UCSB=(
    [server_aliases]=""
 )
 
-declare -A UCB=(
-   [host]="UCLA"
-   [server_name]="m.berkeley.edu"
-   [docroot]="/var/www/html/mwf/berkeley.prod"
-   [path]=""
-   [apache_config]="/etc/httpd/conf.d"
-   [git_user_ID]="https://[[git_user_ID]]@github.com/ucla/mobile13.git"
-   [git_repository]="mwf-cenic"
-   [url_path]="http://m.berkeley.edu"
-   [aliased_path]=""
-   [aliased_directory]=""
-   [site_name]="berkeley.prod"
-   [server_aliases]=""
-)
 declare -A UCSD=(
    [host]="UCSD"
    [server_name]="m.ucsb.edu"
