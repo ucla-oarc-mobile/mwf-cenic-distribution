@@ -162,7 +162,7 @@ declare -A Berkeley=(
 declare -A UCSB=(
    [host]="UCSB"
    [server_name]="m.ucsb.edu"
-   [docroot]="/var/www/html/mwf/ucsb.prod"
+   [docroot]="/var/www/html/mwf/ucsb.stage"
    [path]=""
    [apache_config]="/etc/httpd/conf.d"
    [git_user_ID]="StillSlippery"
@@ -170,14 +170,14 @@ declare -A UCSB=(
    [url_path]="http://m.ucsb.edu"
    [aliased_path]=""
    [aliased_directory]=""
-   [site_name]="ucsb.prod"
+   [site_name]="ucsb.stage"
    [server_aliases]=""
 )
 
 declare -A UCSD=(
    [host]="UCSD"
    [server_name]="m.ucsb.edu"
-   [docroot]="/var/www/html/mwf/ucsb.prod"
+   [docroot]="/var/www/html/mwf/ucsb.stage"
    [path]=""
    [apache_config]="/etc/httpd/conf.d"
    [git_user_ID]="StillSlippery"
@@ -185,6 +185,6 @@ declare -A UCSD=(
    [url_path]="http://m.ucsb.edu"
    [aliased_path]=""
    [aliased_directory]=""
-   [site_name]="ucsb.prod"
+   [site_name]="ucsb.stage"
    [server_aliases]=""
 )

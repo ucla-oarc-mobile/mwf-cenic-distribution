@@ -7,7 +7,7 @@
 #unset DEBUG
 #DEBUG=true
 
-# get the source directory of this script to source the config.txt file first thing.  This is 
+# get the source directory of this script to source the config-prod.txt file first thing.  This is 
 # convoluted to follow synlinks, etc
 
 SOURCE="${BASH_SOURCE[0]}"
@@ -34,9 +34,9 @@ fi
  if [ $DEBUG ] ; then echo "$LINENO: DIR is '$DIR'" ; fi
 
 #
-# configuration and replace function are in the config.txt file that is sourced below
+# configuration and replace function are in the config-prod.txt file that is sourced below
 # in addition to the error trap routine that needs to be sourced first thing
-. $DIR/config.txt
+. $DIR/config-prod.txt
 
 
 echo "Starting.."

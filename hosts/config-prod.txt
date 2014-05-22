@@ -77,7 +77,7 @@ HOSTS=(
 declare -A UCLA=(
    [host]="UCLA"
    [server_name]="m.ucla.edu"
-   [docroot]="/var/www/mwf/ucla.stage"
+   [docroot]="/var/www/mwf/ucla.prod"
    [path]=""
    [apache_available_config]="/etc/httpd/sites-available/UCLA-vhost.conf"
    [apache_enabled_config]="/etc/httpd/sites-enabled/UCLA-vhost.conf"
@@ -87,7 +87,7 @@ declare -A UCLA=(
    [url_path]="http://m.ucla.edu"
    [aliased_path]=""
    [aliased_directory]=""
-   [site_name]="ucla.stage"
+   [site_name]="ucla.prod"
    [server_aliases]=""
 )
 
@@ -111,7 +111,7 @@ declare -A UCLA=(
 declare -A UCLA_12=(
    [host]="UCLA_12"
    [server_name]="m.ucla.edu"
-   [docroot]="/var/www/mwf/ucla_12.stage"
+   [docroot]="/var/www/mwf/ucla_12.prod"
    [path]=""
    [apache_available_config]="/etc/httpd/sites-available/UCLA_12-vhost.conf"
    [apache_enabled_config]="/etc/httpd/sites-enabled/UCLA_12-vhost.conf"
@@ -119,9 +119,9 @@ declare -A UCLA_12=(
    [git_user_ID]="StillSlippery"
    [git_repository]="https://[[git_user_ID]]@github.com/ucla/mobile.git"
    [url_path]="http://m.ucla.edu"
-   [aliased_path]='/12 /var/www/mwf/ucla_12.stage/root'
+   [aliased_path]='/12 /var/www/mwf/ucla_12.prod/root'
    [aliased_directory]=""
-   [site_name]="ucla_12.stage"
+   [site_name]="ucla_12.prod"
    [server_aliases]=""
 )
 
@@ -145,7 +145,7 @@ declare -A UCLA_12=(
 declare -A Berkeley=(
    [host]="Berkeley"
    [server_name]="cenic-m.berkeley.edu"
-   [docroot]="/var/www/mwf/berkeley.stage"
+   [docroot]="/var/www/mwf/berkeley.prod"
    [path]=""
    [apache_available_config]="/etc/httpd/sites-available/berkeley-vhost.conf"
    [apache_enabled_config]="/etc/httpd/sites-enabled/berkeley-vhost.conf"
@@ -153,9 +153,9 @@ declare -A Berkeley=(
    [git_user_ID]="StillSlippery"
    [git_repository]="https://github.com/BerkeleyEdu/mwf.git"
    [url_path]="http://cenic-m.berkeley.edu"
-   [aliased_path]='/12 /var/www/mwf/berkeley.stage/root'
+   [aliased_path]='/12 /var/www/mwf/berkeley.prod/root'
    [aliased_directory]=""
-   [site_name]="berkeley.stage"
+   [site_name]="berkeley.prod"
    [server_aliases]=""
 )
 

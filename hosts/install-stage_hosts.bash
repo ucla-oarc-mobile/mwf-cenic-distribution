@@ -83,7 +83,7 @@ echo git stuff...
          pushd $docroot
          git init
          git remote add base $(replace $git_repository)
-         git pull base master
+         git pull base stage
          popd
        else
          pushd $docroot
