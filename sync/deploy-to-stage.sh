@@ -28,3 +28,11 @@ do
   done
   ssh -i /root/cenic-mwf.pem root@$i "service httpd reload"
 done
+
+currdate=`date +"%s"`
+current="Staging-mwf-$currdate.tgz"
+tar czvf /var/www/html/$current $MWF_BASE_hosts
+rm /var/www/html/Staging-mwf-current.tgz
+ln -s /var/www/html/$current /var/www/html/Staging-mwf-current.tgz
+current="Apache-Staging-$currdate.tgz"
+tar czvf /var/www/html/$current $MWF_APACHE_CONFIGS
