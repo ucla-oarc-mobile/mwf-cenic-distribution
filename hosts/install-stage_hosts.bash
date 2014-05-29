@@ -86,8 +86,11 @@ echo git stuff...
          git pull base stage
          popd
        else
+	 rm -Rf $docroot
          pushd $docroot
-         git pull $(replace $git_repository)
+         git init
+         git remote add base $(replace $git_repository)
+         git pull base stage
          popd
        fi
     

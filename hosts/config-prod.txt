@@ -69,7 +69,7 @@ HOSTS=(
    [UCLA]=active
    [UCLA_12]=active
    [UCSB]=remove
-   [Berkeley]=remove
+   [Berkeley]=active
    [UCSD]=remove
 )
 

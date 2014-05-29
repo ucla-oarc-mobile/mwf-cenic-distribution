@@ -86,8 +86,12 @@ echo git stuff...
          git pull base master
          popd
        else
+	 rm -Rf $docroot
+         mkdir -p $docroot
          pushd $docroot
-         git pull $(replace $git_repository)
+         git init
+         git remote add base $(replace $git_repository)
+         git pull base master
          popd
        fi
     
