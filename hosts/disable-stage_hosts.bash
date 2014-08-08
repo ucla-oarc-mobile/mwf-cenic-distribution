@@ -40,7 +40,7 @@ if [ $DEBUG ] ; then echo "$LINENO: Debuging on..." ; fi
 for host in "${!HOSTS[@]}"
 do
   if [ $DEBUG ] ; then echo -n "$LINENO: $host is ";  fi
-  if [ ${HOSTS[$host]} != "active" ] 
+  if [ ${HOSTS[$host]} != "active" ] && [ ${HOSTS[$host]} != "ignore" ]
   then
     if [ $DEBUG ] ; then echo "disabling" ; fi
 # 
