@@ -87,6 +87,7 @@ echo git stuff...
          popd
        else
 	 rm -Rf $docroot
+         mkdir -p $docroot
          pushd $docroot
          git init
          git remote add base $(replace $git_repository)
