@@ -66,10 +66,10 @@ config_files=(
 # anything other than active is considered inactive and ignored
 declare -A HOSTS
 HOSTS=(
-   [UCLA]=ignore
-   [UCLA_12]=ignore
+   [UCLA]=active
+   [UCLA_12]=active
    [UCSB]=active
-   [Berkeley]=ignore
+   [Berkeley]=active
    [UCSD]=remove
 )
 
