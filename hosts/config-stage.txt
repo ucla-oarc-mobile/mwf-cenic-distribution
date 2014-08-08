@@ -62,14 +62,14 @@ config_files=(
   )
 
 # Hosts array
-# [hostname]=status (active|inactive|remove) 
+# [hostname]=status (active|inactive|ignore|remove) 
 # anything other than active is considered inactive and ignored
 declare -A HOSTS
 HOSTS=(
    [UCLA]=active
    [UCLA_12]=active
    [UCSB]=active
-   [Berkeley]=active
+   [Berkeley]=ignore
    [UCSD]=remove
 )
 
