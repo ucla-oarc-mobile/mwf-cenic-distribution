@@ -36,14 +36,14 @@ fi
 echo "Starting.."
 if [ $DEBUG ] ; then echo "$LINENO: Debuging on..." ; fi
 
-echo "Running install_hosts-stage.bash" 
+echo "Running install-stage_hosts.bash" 
 # we use source so exit kills the shell, not a forked process
-. $DIR/install_hosts-stage.bash
-echo "Running disable_hosts-stage.bash" 
+. $DIR/install-stage_hosts.bash
+echo "Running disable-stage_hosts.bash" 
 # we use source so exit kills the shell, not a forked process
-. $DIR/disable_hosts-stage.bash
-echo "Running remove_hosts-stage.bash" 
-$DIR/remove_hosts-stage.bash
+. $DIR/disable-stage_hosts.bash
+echo "Running remove-stage_hosts.bash" 
+$DIR/remove-stage_hosts.bash
 
 
 if [ $DEBUG ] ; then echo "$LINENO: Done"; fi
